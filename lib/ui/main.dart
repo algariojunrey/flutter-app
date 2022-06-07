@@ -27,6 +27,7 @@ class Daiwa extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        fontFamily: 'Lato',
       ),
       home: const Login(),
       debugShowCheckedModeBanner: false,

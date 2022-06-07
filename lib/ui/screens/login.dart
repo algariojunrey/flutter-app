@@ -1,4 +1,4 @@
-import 'package:daiwa_mobile/ui/widgets/input.dart';
+import 'package:daiwa_mobile/ui/widgets/button.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -9,8 +9,18 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final String _title = 'ADMIN LOGIN';
+  bool _loginLoading = false;
+
   _login() {
-    print("LOGIN CLICKED");
+    setState(() {
+      _loginLoading = true;
+    });
+
+    Future.delayed(
+      const Duration(seconds: 5),
+      () => {setState(() => _loginLoading = false)},
+    );
   }
 
   @override
@@ -42,14 +52,47 @@ class _LoginState extends State<Login> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      const Text('ADMIN LOGIN'),
-                      const Input(hint: 'Admin ID', paVertical: 10.0),
-                      const Input(hint: 'Password', paVertical: 10.0),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: const Size.fromHeight(50.0)),
+                      Text(
+                        style: const TextStyle(
+                          fontSize: 18.0,
+                          fontFamily: 'Lato-Bold',
+                        ),
+                        _title,
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 24.0, bottom: 24.0),
+                        child: Column(
+                          children: const <Widget>[
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10.0,
+                              ),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: "Admin ID",
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 10.0,
+                              ),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: "Password",
+                                ),
+                                obscureText: true,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Button(
+                        text: 'LOGIN',
                         onPressed: _login,
-                        child: const Text('LOGIN'),
+                        isLoading: _loginLoading,
                       ),
                     ],
                   ),
